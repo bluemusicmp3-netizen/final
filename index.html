@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Diary</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(#050814, #02030a);
+  overflow: hidden;
+}
+
+/* stars */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite;
+}
+@keyframes twinkle {
+  0%,100%{opacity:0.2;}
+  50%{opacity:1;}
+}
+
+/* moon */
+.moon {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 90px;
+  height: 90px;
+  background: #f5f3ce;
+  border-radius: 50%;
+  box-shadow: 0 0 40px #fff7b0;
+}
+
+/* BOOK */
+.book {
+  width: 360px;
+  height: 480px;
+  perspective: 2000px;
+  position: relative;
+}
+
+/* PAGE */
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  transition: transform 1s ease;
+  backface-visibility: hidden;
+  border-radius: 8px;
+}
+
+/* COVER */
+.cover {
+  background: linear-gradient(135deg,#061a3a,#0a3d62,#1e90ff);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Dancing Script', cursive;
+  z-index: 10;
+}
+
+/* INNER PAGES */
+.inner {
+  background: repeating-linear-gradient(
+    white,
+    white 24px,
+    #cfd8dc 25px
+  );
+  font-family: serif;
+  padding: 18px;
+  font-size: 13px;
+  line-height: 22px;
+  overflow-y: auto;
+}
+
+/* FLIP */
+.flipped {
+  transform: rotateY(-180deg);
+}
+
+/* layering */
+#p0 { z-index: 6; }
+#p1 { z-index: 5; }
+#p2 { z-index: 4; }
+#p3 { z-index: 3; }
+#p4 { z-index: 2; }
+#p5 { z-index: 1; }
+
+.spotifyBox {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100%;
+  gap:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="moon"></div>
+
+<div class="book" onclick="flipPage()">
+
+  <!-- COVER -->
+  <div class="page cover" id="p0">
+    <div>HAPPY BIRTHDAY</div>
+    <div style="font-size:42px;">yusuf💙</div>
+  </div>
+
+  <!-- PAGE 1 -->
+  <div class="page inner" id="p1">
+I don’t really know how to put everything into perfect words but I just wanted to share something.
+
+I m really grateful that life brought me to APSA and that I got to know you. You have been a part of some of my best school memories  and I will always value that.
+
+There were times I could not express things properly but the bond we share is something really rare and genuine. Even now I m really happy we have each other's support. Maybe we see this as friendship….. and sometimes we might even argue whether its love or not. But for me its something more than just a label. Its care,affection and a kind of connection that feels pure and genuine…. something calm, respectful and beyond expectations.You will always be that kutty yusuf to me smiling so innocently no matter how much you grow. Maybe with time everything can change but the care and respect I have for you will always remain.
+
+I m not sure how our friendship will go from here but I just want you to know… whenever you feel heavy or need someone to talk to you can always come to me. I will be there.
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page inner" id="p2">
+Even after so many fights I still value what we share… because somehow we always come back and choose to understand each other again.
+
+I act like I m tired of you but if you actually stop talking I will be the first one to come back.
+
+And if I ever do something that hurts you please don’t hesitate to tell me or even fight with me… you have that right.
+
+Don’t get too proud I value you this much only because I like you a little (Note:very little)
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page inner" id="p3">
+I m really sorry about the gift. It wasn’t about the money I just wanted to do something special for you…especially since it was my first gift. It didn’t go as planned I didn’t mean for it to turn into a fight.
+
+Next time… I’ll make it way more than you expect. Anyway just know this next time the gift is going to be way more than you expect and this time nothings going to go wrong…I ll make sure of it.
+
+No matter where life takes us, you will always be someone special to me. Stay happy, keep chasing your dreams and have a beautiful year ahead.
+
+Happy Birthday Mahh💙Stay shine✨️
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="page inner" id="p4">
+    <div class="spotifyBox">
+      <h2>🎵 Your Song</h2>
+      <p>Press play & feel it 💙</p>
+
+      <iframe 
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/0tadueUsI7fVSzWjGhCTtI"
+        width="100%" 
+        height="152"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+      </iframe>
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+/* stars */
+for(let i=0;i<120;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.top=Math.random()*100+"vh";
+  s.style.left=Math.random()*100+"vw";
+  document.body.appendChild(s);
+}
+
+let pages = [
+  document.getElementById("p0"),
+  document.getElementById("p1"),
+  document.getElementById("p2"),
+  document.getElementById("p3"),
+  document.getElementById("p4")
+];
+
+let index = 0;
+
+function flipPage(){
+  if(index < pages.length){
+    pages[index].classList.add("flipped");
+    index++;
+  }
+}
+
+</script>
+
+</body>
+</html>
